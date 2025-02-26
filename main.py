@@ -5,7 +5,7 @@ import numpy as np
 
 def total_salary(path):
     try:
-        df_salary = pd.read_csv(path, delimiter=",", header = None, names = ['name', 'sum'])
+        df_salary = pd.read_csv(path, delimiter = ",", header = None, names = ['name', 'sum'])
     except FileNotFoundError:
         print(f'Can`t find file {path}')
         return None, None
