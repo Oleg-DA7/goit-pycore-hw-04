@@ -30,9 +30,15 @@ print(f"Загальна сума заробітної плати: {total}, Се
 # Завдання 2
 
 def get_cats_info(path):
+    cats_list = []
     result = []
     try:
-        df_cats = pd.read_csv(path, delimiter=",", header = None, names = ['id', 'name', 'age'])
+        with open(path, 'r') as f:
+            for l in f:
+                cats_list.append(l.replace('\n', '').split(","))
+        df_cats = pd.DataFrame(cats_list)
+        df_cats.columns = ['id', 'name', 'age']        
+        #df_cats = pd.read_csv(path, delimiter=",", header = None, names = ['id', 'name', 'age']) # An easier way
     except FileNotFoundError:
         print(f'Can`t find file {path}')
         return None
@@ -43,7 +49,7 @@ def get_cats_info(path):
     if df_cats.empty:
         print(f'Please check the file {path}, it is missing data or invalid format.')
         return None
-    elif np.isnan(df_cats['age'][0]) or len(df_cats.columns) != 3:
+    elif df_cats['age'][0] == None or len(df_cats.columns) != 3:
         print(f'Invalid format file {path}')
         return None
     else: 
