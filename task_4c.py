@@ -36,7 +36,6 @@ def parse_input(user_input):
     
 def main():
     contacts = ContactList()
-    command = None
     print("Welcome to the assistant bot!")
     while True:
         try:
