@@ -15,10 +15,11 @@ class ContactList():
         for i in self.contacts: 
             print(f'{i}')
     def get_phone(self, name):
-        result = 'Phone not found'
+        result = ''
         for i in self.contacts:
             if i.name == name: 
-                result = f'Contact {i.name} phone is {i.phone}'
+                result += f'Contact {i.name} phone is {i.phone} \n'
+        if result == '': result = 'Phone not found'
         return result
     def change_contact(self, name, phone):
         result = 'Phone not found'
@@ -28,7 +29,6 @@ class ContactList():
                 result = f'Contact updated to {i}'
         return result
 
-
 def parse_input(user_input):
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
@@ -36,11 +36,14 @@ def parse_input(user_input):
     
 def main():
     contacts = ContactList()
+    command = None
     print("Welcome to the assistant bot!")
     while True:
-        user_input = input("Enter a command: ")
-        command, *args = parse_input(user_input)
-
+        try:
+            user_input = input("Enter a command: ")
+            command, *args = parse_input(user_input)
+        except Exception as ex:
+            pass
         match command:
             case "close" | "exit":
                 print("Good bye!")
@@ -58,6 +61,7 @@ def main():
                 contacts.all_contacts()
             case _:
                 print("Invalid command.")
+
 
 if __name__ == "__main__":
     main()
