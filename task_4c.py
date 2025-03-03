@@ -10,7 +10,7 @@ class ContactList():
         self.contacts = []    
     def add_contact(self, contact):
         self.contacts.append(contact)
-        return (f'Contact: {contact.name} phone: {contact.phone} added.')
+        return (f'{contact} added.')
     def all_contacts(self):
         for i in self.contacts: 
             print(f'{i}')
